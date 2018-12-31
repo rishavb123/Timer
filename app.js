@@ -30,7 +30,7 @@ switch (process.argv.length) {
 const totalTime = ((hours * 60 + minutes) * 60 + seconds) * 1000;
 let start = Date.now();
 
-app.use(express.static('public'))
+app.use(express.static('.'))
 
 app.get("/time", (req, res) => {
     res.set("Access-Control-Allow-Origin", "*")
