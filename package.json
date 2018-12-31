@@ -1,0 +1,17 @@
+{
+  "name": "timer",
+  "version": "1.0.0",
+  "description": "a simple timer that will run a server to display the time left on the network",
+  "main": "app.js",
+  "scripts": {
+    "test": "node timer.js 10"
+  },
+  "keywords": [
+    "timer"
+  ],
+  "author": "Bhagat",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
