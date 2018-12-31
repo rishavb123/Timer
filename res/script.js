@@ -5,7 +5,7 @@ function getTime() {
     return xmlHttp.responseText;
 }
 const span = document.getElementById("time");
-const audio = new Audio('res/alert.mp3');
+const audio = new Audio('alert.mp3');
 audio.addEventListener('ended', function() {
     this.currentTime = 0;
     if (timerState == "off")
