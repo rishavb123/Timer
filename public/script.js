@@ -12,6 +12,10 @@ audio.addEventListener('ended', function() {
         this.play();
 }, false);
 let timerState = "on";
+if (window.innerHeight > window.innerWidth)
+    span.innerHTML = "0:00:00";
+else
+    span.innerHTML = "0:00:00:000";
 setInterval(() => {
     const time = getTime();
     if (time == 0) {
