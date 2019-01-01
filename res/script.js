@@ -1,26 +1,52 @@
-function getTime() {
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://192.168.1.31:4000/time", false);
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
+function getRequest(sub) {
+    try {
+        const xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "http://192.168.1.31:4000/" + sub, false);
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    } catch (e) {
+        return -1;
+    }
 }
 const span = document.getElementById("time");
 const audio = new Audio('alert.mp3');
+let playCounter = 0;
 audio.addEventListener('ended', function() {
     this.currentTime = 0;
-    if (timerState == "off")
+    if (timerState == "off" && playCounter < 30) {
+        playCounter++;
         this.play();
+    } else {
+        if (playCounter >= 30)
+            timerState = "done";
+        playCounter = 0;
+    }
 }, false);
 let timerState = "on";
 if (window.innerHeight > window.innerWidth)
     span.innerHTML = "0:00:00";
 else
     span.innerHTML = "0:00:00:000";
+
+$('#close').click(() => {
+    playCounter = 30;
+});
+
+$('#stop').click(() => {
+    getRequest('stop');
+});
+
 setInterval(() => {
-    const time = getTime();
+    const time = getRequest('time');
+    if (time < 0) {
+        $('#timer_done_modal').modal('hide');
+        timerState = "disconnected"
+        return;
+    }
     if (time == 0) {
         if (timerState == "on") {
             timerState = "off";
+            $('#timer_done_modal').modal('show');
             audio.play();
         }
     } else {

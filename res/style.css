@@ -3,6 +3,7 @@ body {
 }
 
 #time {
+    font-family: "Courier New", Courier, Arial, Helvetica, sans-serif;
     color: #00ff00;
     font-size: 500%;
     position: absolute;

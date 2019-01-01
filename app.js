@@ -1,4 +1,5 @@
 const express = require('express');
+const cp = require('child_process');
 const app = express();
 const port = 4000;
 
@@ -38,4 +39,11 @@ app.get("/time", (req, res) => {
     res.send("" + ((t < 0) ? 0 : t));
 });
 
-app.listen(port, () => console.log(`Timer listening on port ${port}`));
+app.get("/stop", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*")
+    res.send("Stopping . . .");
+    process.exit(0);
+});
+
+cp.exec('chrome http://localhost:' + port);
+let server = app.listen(port, () => console.log(`Timer listening on port ${port}`));
