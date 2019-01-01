@@ -24,7 +24,7 @@ audio.addEventListener('ended', function() {
 }, false);
 let timerState = "on";
 if (window.innerHeight > window.innerWidth)
-    span.innerHTML = "0:00:00";
+    span.innerHTML = "00:00:00";
 else
     span.innerHTML = "0:00:00:000";
 
@@ -74,3 +74,13 @@ setInterval(() => {
         span.innerHTML = `${hours}:${minutes}:${seconds}:${ms}`;
 
 }, 10);
+
+window.onresize = () => {
+    console.log('ksdljfl');
+    if (timerState == 'disconnected') {
+        if (window.innerHeight > window.innerWidth)
+            span.innerHTML = "00:00:00";
+        else
+            span.innerHTML = "0:00:00:000";
+    }
+};
