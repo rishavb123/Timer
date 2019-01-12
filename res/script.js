@@ -1,7 +1,7 @@
 function getRequest(sub) {
     try {
         const xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", "http://192.168.1.31:4000/" + sub, false);
+        xmlHttp.open("GET", "http://192.168.1.22:4000/" + sub, false);
         xmlHttp.send(null);
         return xmlHttp.responseText;
     } catch (e) {
