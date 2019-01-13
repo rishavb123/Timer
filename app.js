@@ -3,24 +3,32 @@ const cp = require('child_process');
 const app = express();
 const port = 4000;
 
+let openChrome = false;
+let shift = 0;
+if(process.argv[2] === "--open" || process.argv[2] === "-o")
+{
+    openChrome = true;
+    shift = 1;
+}
+
 let hours;
 let minutes;
 let seconds;
 switch (process.argv.length) {
-    case 3:
+    case 3+shift:
         hours = 0;
         minutes = 0;
-        seconds = parseInt(process.argv[2]);
+        seconds = parseInt(process.argv[2+shift]);
         break;
-    case 4:
+    case 4+shift:
         hours = 0;
-        minutes = parseInt(process.argv[2]);
-        seconds = parseInt(process.argv[3]);
+        minutes = parseInt(process.argv[2+shift]);
+        seconds = parseInt(process.argv[3+shift]);
         break;
-    case 5:
-        hours = parseInt(process.argv[2]);
-        minutes = parseInt(process.argv[3]);
-        seconds = parseInt(process.argv[4]);
+    case 5+shift:
+        hours = parseInt(process.argv[2+shift]);
+        minutes = parseInt(process.argv[3+shift]);
+        seconds = parseInt(process.argv[4+shift]);
         break;
     default:
         hours = 0;
@@ -44,6 +52,8 @@ app.get("/stop", (req, res) => {
     res.send("Stopping . . .");
     process.exit(0);
 });
-
-cp.exec('chrome http://localhost:' + port);
+if(openChrome) {
+    console.log("Opening Chrome . . .")
+    cp.exec('chrome http://localhost:' + port);
+}
 let server = app.listen(port, () => console.log(`Timer listening on port ${port}`));
