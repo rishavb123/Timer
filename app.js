@@ -53,7 +53,7 @@ app.get("/stop", (req, res) => {
     process.exit(0);
 });
 if(openChrome) {
-    console.log("Opening Chrome . . .")
+    console.log("Opening Chrome . . .");
     cp.exec('chrome http://localhost:' + port);
 }
 let server = app.listen(port, () => console.log(`Timer listening on port ${port}`));
